@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://iw11wqpihgr6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bo3tl"]
+radius = 0.4
+height = 2.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mf0ix"]
+radius = 0.4
+height = 2.2
+
+[node name="Monster" type="CharacterBody3D" unique_id=214674686]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2062195538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("CapsuleShape3D_bo3tl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=264321948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+mesh = SubResource("CapsuleMesh_mf0ix")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1267664034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1743454893]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
+
+[node name="Eyes" type="Marker3D" parent="." unique_id=1598547969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
