@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://tf7ekfmwm83q"]
 
 [ext_resource type="Script" uid="uid://g4hkrnbstuic" path="res://player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://c8t6eift5x2w0" path="res://stress.gd" id="2_kpjcp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bo3tl"]
 radius = 0.12
@@ -18,3 +19,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=364601830]
 fov = 95.0
+
+[node name="Stress" type="Node" parent="." unique_id=927932796]
+script = ExtResource("2_kpjcp")

@@ -27,6 +27,7 @@ var investigate_target := Vector3.ZERO
 func _ready() -> void:
 	set_physics_process(false)      # пока навигация не готова, ничего не делаем
 	player = get_tree().get_first_node_in_group("player")
+	add_to_group("monster")
 	player.noise_made.connect(_on_noise_made)   # подписка на сигнал шума
 
 	for point in patrol_root.get_children():
