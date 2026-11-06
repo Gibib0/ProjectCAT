@@ -13,6 +13,7 @@ enum State { PATROL, INVESTIGATE, CHASE }
 @export var gravity := 14.0
 @export var freeze_vision_factor := 0.3    # во сколько раз падает дальность зрения для замершего кота
 
+
 var state: State = State.PATROL
 var player: CharacterBody3D
 var patrol_points: Array[Vector3] = []
@@ -20,6 +21,7 @@ var patrol_index := 0
 var wait_timer := 0.0
 var time_since_seen := 0.0
 var investigate_target := Vector3.ZERO
+var active := true    # false на время катсцен: монстр стоит на месте
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var eyes: Marker3D = $Eyes
@@ -43,6 +45,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+
+	if not active:           # ← НОВОЕ: на время катсцены просто стоим
+		_stop()
+		move_and_slide()     # чтобы гравитация продолжала работать
+		return
 
 	var sees_player := _can_see_player()
 
@@ -134,7 +141,7 @@ func _can_see_player() -> bool:
 
 
 func _on_noise_made(pos: Vector3, loudness: float) -> void:
-	if state == State.CHASE:
+	if not active or state == State.CHASE:
 		return
 	# Чем громче шум, тем дальше он слышен
 	if global_position.distance_to(pos) <= hearing_range * loudness:
@@ -175,3 +182,11 @@ func _caught() -> void:
 	print("ПОЙМАН!")
 	set_physics_process(false)
 	get_tree().get_first_node_in_group("caught_screen").show_screen()
+	
+func set_active(value: bool) -> void:
+	active = value
+	if not value:
+		_stop()
+	else:
+		_set_state(State.PATROL)    # начинаем с чистого листа, без «погони» из прошлого
+	print("Монстр активен: ", value)

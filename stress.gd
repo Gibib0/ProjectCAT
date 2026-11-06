@@ -16,6 +16,7 @@ var value := 0.0                     # итог: base + скачки
 var stage := 0
 var spikes: Array[Dictionary] = []   # активные скачки от шума
 var _panic_fired := false
+var paused := false    # true на время катсцен: базовый стресс не меняется
 
 @onready var player: CharacterBody3D = get_parent()
 
@@ -25,7 +26,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	_update_base(delta)
+	if not paused:
+		_update_base(delta)
 	value = clampf(base + _update_spikes(delta), 0.0, 100.0)
 	value_changed.emit(value)
 	_check_stage()
