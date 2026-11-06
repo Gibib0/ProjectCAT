@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://i46ckrpxk5yo"]
+
+[ext_resource type="Script" uid="uid://cbh2w57aws313" path="res://hiding_spot.gd" id="1_gj7uu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bo3tl"]
+
+[node name="HidingSpot" type="Area3D" unique_id=1796043509]
+script = ExtResource("1_gj7uu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2143046468]
+transform = Transform3D(1.6, 0, 0, 0, 0.4, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource("BoxShape3D_bo3tl")

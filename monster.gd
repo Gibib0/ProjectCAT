@@ -11,6 +11,7 @@ enum State { PATROL, INVESTIGATE, CHASE }
 @export var catch_distance := 1.0
 @export var lose_sight_time := 3.0       # сколько секунд помнит кота после потери
 @export var gravity := 14.0
+@export var freeze_vision_factor := 0.3    # во сколько раз падает дальность зрения для замершего кота
 
 var state: State = State.PATROL
 var player: CharacterBody3D
@@ -97,7 +98,8 @@ func _do_chase(delta: float, sees_player: bool) -> void:
 
 	_move_towards(investigate_target, chase_speed, delta)
 
-	if global_position.distance_to(player.global_position) < catch_distance:
+	var close_enough := global_position.distance_to(player.global_position) < catch_distance
+	if close_enough and not player.is_hidden:
 		_caught()
 	elif time_since_seen > lose_sight_time:
 		_set_state(State.INVESTIGATE)
@@ -106,10 +108,16 @@ func _do_chase(delta: float, sees_player: bool) -> void:
 # ---------- Чувства ----------
 
 func _can_see_player() -> bool:
+	if player.is_hidden:
+		return false
+
 	var target := player.global_position + Vector3(0, 0.2, 0)
 	var to_player := target - eyes.global_position
 
-	if to_player.length() > vision_range:
+	var range_now := vision_range
+	if player.is_frozen:
+		range_now *= freeze_vision_factor    # неподвижного в темноте заметить трудно
+	if to_player.length() > range_now:
 		return false
 
 	# Угол считаем в горизонтали, иначе близкий кот «слишком низко» и выпадает из конуса
@@ -166,5 +174,4 @@ func _set_state(new_state: State) -> void:
 func _caught() -> void:
 	print("ПОЙМАН!")
 	set_physics_process(false)
-	# Временно просто перезапускаем уровень; экран «Пойман» сделаем позже
-	get_tree().reload_current_scene.call_deferred()
+	get_tree().get_first_node_in_group("caught_screen").show_screen()

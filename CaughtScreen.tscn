@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://chpto3tqupjsg"]
+
+[ext_resource type="Script" uid="uid://r6pgripgqpb3" path="res://caught_screen.gd" id="1_qfjxx"]
+
+[sub_resource type="FontVariation" id="FontVariation_w8wkn"]
+spacing_glyph = 16
+
+[sub_resource type="FontVariation" id="FontVariation_eevh5"]
+spacing_glyph = 8
+spacing_space = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfjxx"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="FontVariation" id="FontVariation_0qx2d"]
+spacing_glyph = 8
+spacing_space = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hcyp"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[node name="CaughtScreen" type="CanvasLayer" unique_id=104296623]
+process_mode = 3
+layer = 10
+script = ExtResource("1_qfjxx")
+
+[node name="Root" type="Control" parent="." unique_id=1408089148]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Root" unique_id=1682069335]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Center" type="CenterContainer" parent="Root" unique_id=1730672979]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="Root/Center" unique_id=214101020]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="Root/Center/Menu" unique_id=1734492470]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = SubResource("FontVariation_w8wkn")
+theme_override_font_sizes/font_size = 44
+text = "Пойман!"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="Root/Center/Menu" unique_id=967367205]
+custom_minimum_size = Vector2(500, 0)
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_eevh5")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_qfjxx")
+text = "Начать с контрольной точки"
+
+[node name="MenuButton" type="Button" parent="Root/Center/Menu" unique_id=1210176487]
+custom_minimum_size = Vector2(500, 0)
+custom_maximum_size = Vector2(500, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_0qx2d")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_1hcyp")
+text = "Выйти в главное меню"

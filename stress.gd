@@ -8,6 +8,7 @@ signal panicked
 @export var rise_rate := 25.0        # скорость роста вплотную к монстру (ед/с)
 @export var calm_rate := 3.0         # медленное успокоение, когда монстров рядом нет
 @export var safe_calm_rate := 15.0   # быстрое успокоение в укрытии
+@export var freeze_rise_factor := 0.5
 
 var base := 0.0                      # медленная часть стресса
 var safe := false                    # true, пока кот в укрытии (включим позже)
@@ -48,14 +49,16 @@ func _update_base(delta: float) -> void:
 	for monster in get_tree().get_nodes_in_group("monster"):
 		nearest = minf(nearest, player.global_position.distance_to(monster.global_position))
 
-	if safe:
-		base -= safe_calm_rate * delta
-	elif nearest < sense_range:
-		# Чем ближе монстр, тем быстрее растёт (0 на границе, 1 вплотную)
-		var closeness := 1.0 - nearest / sense_range
-		base += rise_rate * closeness * delta
-	else:
-		base -= calm_rate * delta
+		if safe:
+			base -= safe_calm_rate * delta
+		elif nearest < sense_range:
+			var closeness := 1.0 - nearest / sense_range
+			var rate := rise_rate * closeness
+			if player.is_frozen:
+				rate *= freeze_rise_factor    # замерев, стресс растёт медленнее
+			base += rate * delta
+		elif not player.is_frozen:
+			base -= calm_rate * delta         # замерев, стресс не падает
 
 	base = clampf(base, 0.0, 100.0)
 

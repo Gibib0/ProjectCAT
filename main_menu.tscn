@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://cxhfbqtra1qaj"]
+
+[ext_resource type="Script" uid="uid://dhoh8becqdn2r" path="res://main_menu.gd" id="1_06t4h"]
+
+[sub_resource type="FontVariation" id="FontVariation_bo3tl"]
+spacing_glyph = 8
+spacing_space = 9
+spacing_bottom = 10
+
+[sub_resource type="FontVariation" id="FontVariation_mf0ix"]
+spacing_glyph = 8
+spacing_space = 9
+
+[sub_resource type="FontVariation" id="FontVariation_x2yq2"]
+spacing_glyph = 8
+spacing_space = 9
+
+[sub_resource type="FontVariation" id="FontVariation_r2huc"]
+spacing_glyph = 8
+spacing_space = 9
+
+[sub_resource type="FontVariation" id="FontVariation_c1xqq"]
+spacing_glyph = 8
+spacing_space = 9
+
+[node name="MainMenu" type="Control" unique_id=2018533344]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Background" type="ColorRect" parent="." unique_id=2030284783]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1294312884]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="." unique_id=113406994]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -281.0
+offset_right = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Menu" unique_id=1116660567]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_bo3tl")
+theme_override_font_sizes/font_size = 72
+text = "Project: C.A.T"
+horizontal_alignment = 1
+
+[node name="NewGame" type="Button" parent="Menu" unique_id=255736327]
+custom_minimum_size = Vector2(400, 60)
+custom_maximum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_mf0ix")
+theme_override_font_sizes/font_size = 18
+text = "New Game"
+
+[node name="Settings" type="Button" parent="Menu" unique_id=509136626]
+custom_minimum_size = Vector2(400, 60)
+custom_maximum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_x2yq2")
+theme_override_font_sizes/font_size = 18
+text = "Settings"
+
+[node name="Credits" type="Button" parent="Menu" unique_id=1776248592]
+custom_minimum_size = Vector2(400, 60)
+custom_maximum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_r2huc")
+theme_override_font_sizes/font_size = 18
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Menu" unique_id=1751808182]
+custom_minimum_size = Vector2(400, 60)
+custom_maximum_size = Vector2(400, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_c1xqq")
+theme_override_font_sizes/font_size = 18
+text = "Quit"
